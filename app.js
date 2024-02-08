@@ -1,7 +1,6 @@
-// MongoDB User Password: m39Bh0H2RHSxe4V4
-// MongoDB Connection: mongodb+srv://berlinerkyle:m39Bh0H2RHSxe4V4@fitritionapi.l4op2ax.mongodb.net/?retryWrites=true&w=majority
-
 // Installing Dependencies
+
+require('dotenv').config();
 
 const express = require('express');
 
@@ -15,7 +14,7 @@ app.use(express.json());
 
 // Connecting to MongoDB
 
-mongoose.connect('mongodb+srv://berlinerkyle:m39Bh0H2RHSxe4V4@fitritionapi.l4op2ax.mongodb.net/?retryWrites=true&w=majority')
+mongoose.connect(process.env.DATABASE_URL)
     .then(() => {
         console.log('successfully connected to MongoDB Atlas!');
     })
