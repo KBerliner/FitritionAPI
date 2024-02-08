@@ -6,7 +6,7 @@ const User = require('../models/user');
 
 exports.test = (req, res, next) => {
     res.status(201).json({
-        message: 'ACCESS GRANTED'
+        message: 'ACCESS GRANTED: UPDATED'
     });
 };
 
