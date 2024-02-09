@@ -2,13 +2,13 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
-// A "Test" Function
+// The "Test" Function
 
 exports.test = (req, res, next) => {
     res.status(201).json({
-        message: 'ACCESS GRANTED: UPDATED'
-    });
-};
+        message: 'TESTED SUCCESSFULLY'
+    })
+}
 
 // The "Signup" Function
 
