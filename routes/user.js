@@ -7,7 +7,7 @@ const userCtrl = require('../controllers/user');
 
 router.post('/signup', userCtrl.signup);
 router.post('/login', userCtrl.login);
-router.post('/test', userCtrl.test)
+router.get('/test', userCtrl.test)
 
 // Exporting Routes
 
