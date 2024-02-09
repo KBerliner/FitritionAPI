@@ -5,6 +5,7 @@ const User = require('../models/user');
 // The "Test" Function
 
 exports.test = (req, res, next) => {
+    console.log('HIT');
     res.status(201).json({
         message: 'TESTED SUCCESSFULLY'
     })
