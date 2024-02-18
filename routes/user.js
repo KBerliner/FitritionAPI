@@ -1,15 +1,19 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
-const auth = require('../middleware/auth');
+const auth = require("../middleware/auth");
 
-const userCtrl = require('../controllers/user');
+const userCtrl = require("../controllers/user");
 
 // Routing Endpoints
 
-router.post('/signup', userCtrl.signup);
-router.post('/login', userCtrl.login);
-router.get('/test', userCtrl.test);
+// User
+
+router.post("/signup", userCtrl.signup);
+router.post("/login", userCtrl.login);
+router.get("/test", userCtrl.test);
+
+// Workout
 
 // Exporting Routes
 
