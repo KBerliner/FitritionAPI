@@ -5,7 +5,8 @@ require("dotenv").config();
 // The "Add" Function
 
 exports.add = (req, res, next) => {
-	req.body
+	const exercise = new Workout(req.body);
+	exercise
 		.save()
 		.then(
 			res.status(201).json({
@@ -19,6 +20,19 @@ exports.add = (req, res, next) => {
 		});
 };
 
-// The "Update" Function
+// The "Change" Function
 
-exports.update = (req, res, next) => {};
+exports.change = (req, res, next) => {
+	Workout.updateOne({ _id: req.params.id }, req.body)
+		.then(() => {
+			console.log("HIT");
+			res.status(201).json({
+				message: "Workout updated successfully!",
+			});
+		})
+		.catch((error) => {
+			res.status(500).json({
+				error,
+			});
+		});
+};

@@ -8,6 +8,7 @@ const workoutCtrl = require("../controllers/workout");
 // Routing Endpoints
 
 router.post("/add", auth, workoutCtrl.add);
+router.put("/change/:id", auth, workoutCtrl.change);
 
 // Exporting Routes
 
