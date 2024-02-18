@@ -9,6 +9,7 @@ const workoutCtrl = require("../controllers/workout");
 
 router.post("/add", auth, workoutCtrl.add);
 router.put("/change/:id", auth, workoutCtrl.change);
+router.delete("/delete/:id", auth, workoutCtrl.delete);
 
 // Exporting Routes
 
