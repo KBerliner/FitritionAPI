@@ -12,6 +12,8 @@ require("dotenv").config();
 
 exports.add = (req, res, next) => {
 	let exercise;
+
+	// Assigning keys that are in every exercise object
 	let defaultExercise = {
 		type: req.body.type,
 		userId: req.body.userId,
@@ -20,6 +22,7 @@ exports.add = (req, res, next) => {
 		startTime: req.body.startTime,
 		endTime: req.body.endTime,
 	};
+
 	switch (req.body.type) {
 		case "climb":
 			exercise = new Climb({
@@ -74,6 +77,8 @@ exports.add = (req, res, next) => {
 		default:
 			console.error(`${req.type} is not a supported exercise!`);
 	}
+
+	// Saving to the database
 
 	exercise
 		.save()
