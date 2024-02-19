@@ -11,6 +11,7 @@ router.post("/signup", userCtrl.signup);
 router.post("/login", userCtrl.login);
 
 router.put("/addWorkout", auth, userCtrl.addWorkout);
+router.put("/removeWorkout", auth, userCtrl.removeWorkout);
 
 router.get("/test", userCtrl.test);
 

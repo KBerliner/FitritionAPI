@@ -25,11 +25,11 @@ exports.test = (req, res, next) => {
 exports.addWorkout = (req, res, next) => {
 	User.findOne({ _id: req.auth.userId })
 		.then((user) => {
-			// Checking if the meal exists
+			// Checking if the user exists
 			if (!user) {
 				return res.status(404).json({ error: "User not found!" });
 			}
-			// Checking if the user is the owner
+			// Checking if the user is the owner of the profile
 			if (user._d !== req.auth.userId) {
 				return res.status(401).json({ error: "Unauthorized request!" });
 			}
@@ -40,6 +40,39 @@ exports.addWorkout = (req, res, next) => {
 				.then(() => {
 					res.status(201).json({
 						message: "Workout successfully added to profile!",
+					});
+				})
+				.catch((error) => {
+					res.status(500).json({ error });
+				});
+		})
+		.catch((error) => {
+			res.status(500).json({ error });
+		});
+};
+
+// The "Remove Workout" Function
+
+exports.removeWorkout = (req, res, next) => {
+	User.findOne({ _id: req.auth.userId })
+		.then((user) => {
+			// Checking if the user exists
+			if (!user) {
+				return res.status(404).json({ error: "User not found!" });
+			}
+			// Checking if the user is the owner of the profile
+			if (user._id !== req.auth.userId) {
+				return res.status(401).json({ error: "Unauthorized request!" });
+			}
+
+			const newWorkouts = user.workouts.filter(
+				(workout) => workout !== req.body.workout
+			);
+
+			User.updateOne({ _id: req.auth.userId }, newWorkouts)
+				.then(() => {
+					res.status(200).json({
+						message: "Workout successfully removed from profile!",
 					});
 				})
 				.catch((error) => {
