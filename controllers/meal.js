@@ -35,7 +35,7 @@ exports.change = (req, res, next) => {
 		Meal.updateOne({ _id: req.params.id }, req.body)
 			.then(() => {
 				res.status(201).json({
-					message: "Workout updated successfully!",
+					message: "Meal updated successfully!",
 				});
 			})
 			.catch((error) => {

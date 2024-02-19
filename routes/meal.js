@@ -10,7 +10,7 @@ const mealCtrl = require("../controllers/meal");
 router.post("/add", auth, mealCtrl.add);
 router.put("/change/:id", auth, mealCtrl.change);
 router.delete("/delete/:id", auth, mealCtrl.delete);
-router.get("/all", auth, mealCtrl.all);
+router.get("/", auth, mealCtrl.all);
 
 // Exporting Routes
 
