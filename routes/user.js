@@ -9,6 +9,9 @@ const userCtrl = require("../controllers/user");
 
 router.post("/signup", userCtrl.signup);
 router.post("/login", userCtrl.login);
+
+router.put("/addWorkout", auth, userCtrl.addWorkout);
+
 router.get("/test", userCtrl.test);
 
 // Exporting Routes
