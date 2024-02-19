@@ -30,13 +30,17 @@ exports.addWorkout = (req, res, next) => {
 				return res.status(404).json({ error: "User not found!" });
 			}
 			// Checking if the user is the owner of the profile
-			if (user._d !== req.auth.userId) {
+			if (user._id.toString() !== req.auth.userId) {
 				return res.status(401).json({ error: "Unauthorized request!" });
 			}
 
 			const newWorkouts = [...user.workouts, ...req.body.workouts];
+			const userUpdate = {
+				...user._doc,
+				workouts: newWorkouts,
+			};
 
-			User.updateOne({ _id: req.auth.userId }, newWorkouts)
+			User.updateOne({ _id: req.auth.userId }, userUpdate)
 				.then(() => {
 					res.status(201).json({
 						message: "Workout successfully added to profile!",
@@ -61,15 +65,19 @@ exports.removeWorkout = (req, res, next) => {
 				return res.status(404).json({ error: "User not found!" });
 			}
 			// Checking if the user is the owner of the profile
-			if (user._id !== req.auth.userId) {
+			if (user._id.toString() !== req.auth.userId) {
 				return res.status(401).json({ error: "Unauthorized request!" });
 			}
 
 			const newWorkouts = user.workouts.filter(
 				(workout) => workout !== req.body.workout
 			);
+			const userUpdate = {
+				...user._doc,
+				workouts: newWorkouts,
+			};
 
-			User.updateOne({ _id: req.auth.userId }, newWorkouts)
+			User.updateOne({ _id: req.auth.userId }, userUpdate)
 				.then(() => {
 					res.status(200).json({
 						message: "Workout successfully removed from profile!",
@@ -91,6 +99,7 @@ exports.signup = (req, res, next) => {
 		username: req.body.username,
 		email: req.body.email,
 		password: req.body.password,
+		workouts: [],
 	});
 	let token = jwt.sign(
 		{ userId: user._id },
@@ -104,6 +113,7 @@ exports.signup = (req, res, next) => {
 				message: "User added successfully!",
 				username: req.body.username,
 				userId: user._id,
+				workouts: user.workouts,
 				token: token,
 			});
 		})
@@ -145,6 +155,7 @@ exports.login = (req, res, next) => {
 					res.status(200).json({
 						userId: user._id,
 						username: user.username,
+						workouts: user.workouts,
 						token: token,
 					});
 				})
