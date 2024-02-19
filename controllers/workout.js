@@ -24,18 +24,17 @@ exports.add = (req, res, next) => {
 
 exports.change = (req, res, next) => {
 	Workout.findOne({ _id: req.params.id }).then((workout) => {
-		// Checking if the user is the owner
+		// Checking if the workout exists
 		if (!workout) {
 			return res.status(404).json({ error: "Workout not found!" });
 		}
-		// Checking if the workout exists
+		// Checking if the user is the owner
 		if (workout.userId !== req.auth.userId) {
 			return res.status(401).json({ error: "Unauthorized request!" });
 		}
 
 		Workout.updateOne({ _id: req.params.id }, req.body)
 			.then(() => {
-				console.log("HIT");
 				res.status(201).json({
 					message: "Workout updated successfully!",
 				});
