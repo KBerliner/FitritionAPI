@@ -34,7 +34,7 @@ exports.addWorkout = (req, res, next) => {
 				return res.status(401).json({ error: "Unauthorized request!" });
 			}
 
-			const newWorkouts = [...user.workouts, ...req.body];
+			const newWorkouts = [...user.workouts, ...req.body.workouts];
 
 			User.updateOne({ _id: req.auth.userId }, newWorkouts)
 				.then(() => {
