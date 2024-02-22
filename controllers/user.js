@@ -104,7 +104,7 @@ exports.signup = (req, res, next) => {
 	let token = jwt.sign(
 		{ userId: user._id },
 		process.env.JWT_VERIFICATION_CODE,
-		{ expiresIn: "2h" }
+		{ expiresIn: "15m" }
 	);
 	user
 		.save()
@@ -149,7 +149,7 @@ exports.login = (req, res, next) => {
 					let token = jwt.sign(
 						{ userId: user._id },
 						process.env.JWT_VERIFICATION_CODE,
-						{ expiresIn: "2h" }
+						{ expiresIn: "15m" }
 					);
 
 					res.status(200).json({

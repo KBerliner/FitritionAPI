@@ -6,6 +6,7 @@ require("dotenv").config();
 
 exports.add = (req, res, next) => {
 	const exercise = new Workout(req.body);
+	console.log(exercise);
 	exercise
 		.save()
 		.then(
